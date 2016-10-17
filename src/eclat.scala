@@ -7,7 +7,7 @@ object eclat {
   def main(args: Array[String]) {
     val x1:itemSet = itemSet(Set('A'), Set(1,3,4,5))
     val x2:itemSet = itemSet(Set('B'), Set(1,2,3,4,5,6))
-    val x3:itemSet = itemSet(Set('C'), Set(2,3,5,6))
+    val x3:itemSet = itemSet(Set('C'), Set(2,4,5,6))
     val x4:itemSet = itemSet(Set('D'), Set(1,3,5,6))
     val x5:itemSet = itemSet(Set('E'), Set(1,2,3,4,5))
     val P:Set[itemSet] = Set(x1,x2,x3,x4,x5)
@@ -24,10 +24,10 @@ object eclat {
     val seqB = diffB.toString()
     //println(seqA + " " + seqB)
     if(seqA(4) != ')' && seqB(4) != ')' && seqA(4) > seqB(4))
-      {println("ok "+ Xa +" "+Xb + " "  + seqA(4) +" "+ seqB(4))
+      {//println("ok "+ Xa +" "+Xb + " "  + seqA(4) +" "+ seqB(4))
       return true}
     else
-      {println("no " + Xa +" "+Xb + " " + seqA(4) +" "+ seqB(4))
+      {//println("no " + Xa +" "+Xb + " " + seqA(4) +" "+ seqB(4))
       return false}
   }
 
@@ -53,8 +53,9 @@ object eclat {
 
       if(P1.nonEmpty){
         val F_next:Set[itemSet] = ECLAT(P1,min_sup,F_curr)
-        /*println(F_next)
-        F_next.foreach(item =>
+        //println(F_next)
+        F_curr = F_curr | F_next
+        /*F_next.foreach(item =>
           F_curr = F_curr + item
         )
         return F_curr*/
