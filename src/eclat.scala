@@ -1,6 +1,7 @@
 /**
   * Created by Pritam on 16-Oct-16.
   */
+//objects are an anonymous (inaccessible) class and creates a single instance of this class 
 object eclat {
   case class itemSet(i: Set[Char], t_i: Set[Int])
 
