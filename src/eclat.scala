@@ -1,9 +1,14 @@
 /**
   * Created by Pritam on 16-Oct-16.
   */
+import java.io._
+import scala.io.Source
+import java.util.concurrent
+
 //objects are an anonymous (inaccessible) class and creates a single instance of this class 
 object eclat {
   case class itemSet(i: Set[Char], t_i: Set[Int])
+  case class d_itemSet(i: Set[Char], d_i: Set[Int], sup_i : Int)
 
   def main(args: Array[String]) {
     val x1:itemSet = itemSet(Set('A'), Set(1,3,4,5))
@@ -13,8 +18,47 @@ object eclat {
     val x5:itemSet = itemSet(Set('E'), Set(1,2,3,4,5))
     val P:Set[itemSet] = Set(x1,x2,x3,x4,x5)
     val F:Set[itemSet] = Set()
+    val min_support = 3
     //println("Hello, world!" + P)
-    println(ECLAT(P, 3, F))
+
+    // ECLAT
+    val writer = new PrintWriter(new File("time_plotter.csv" ))
+    val max_loop:Int = 50 // number of times the code will run
+
+    var time_sum:Long = 0 // in nano seconds
+    for(i <- 1 to max_loop) {
+      //println(time_sum)
+      val t0 = System.nanoTime()
+      ECLAT(P, min_support, F)
+      val t1 = System.nanoTime()
+      time_sum += (t1 - t0)
+      writer.write((t1 - t0).toString + ", ")
+    }
+    writer.write("\n")
+    //println(output_eclat)
+    writer.close()
+    println("Time required for eclat : " + time_sum.toDouble / (max_loop * 1000).toDouble + " ms")
+
+    // dECLAT
+    var DP:Set[d_itemSet] = Set()
+    var T:Set[Int] = Set()
+    val DF:Set[d_itemSet] = Set()
+    P.foreach{ item =>
+      T = T | item.t_i
+    }
+    P.foreach{ item =>
+      val t:d_itemSet = new d_itemSet(item.i, T -- item.t_i, item.t_i.size)
+      DP += t
+    }
+    //println(DP)
+    println(dECLAT(DP, min_support, DF))
+
+  }
+
+  def dECLAT(DP:Set[d_itemSet], min_sup:Int, F:Set[d_itemSet]) : Set[d_itemSet] = {
+    var F_curr:Set[d_itemSet] = F  //initialize F_curr as null set
+    
+    return F_curr
   }
 
  //compare Xa with Xb, return true if Xa is less than Xb
