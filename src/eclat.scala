@@ -17,27 +17,36 @@ object eclat {
     val x4:itemSet = itemSet(Set('D'), Set(1,3,5,6))
     val x5:itemSet = itemSet(Set('E'), Set(1,2,3,4,5))
     val P:Set[itemSet] = Set(x1,x2,x3,x4,x5)
+
     val F:Set[itemSet] = Set()
     val min_support = 3
-    //println("Hello, world!" + P)
+    val run_eclat:Boolean = true
 
     // ECLAT
-    val writer = new PrintWriter(new File("time_plotter.csv" ))
+    var writer:FileWriter = new FileWriter(new File("empty.csv"), true)
+    if(run_eclat) {
+      writer = new FileWriter(new File("eclat_plotter.csv"), true)
+    } else {
+      writer = new FileWriter(new File("declat_plotter.csv"), true)
+    }
     val max_loop:Int = 50 // number of times the code will run
 
     var time_sum:Long = 0 // in nano seconds
-    for(i <- 1 to max_loop) {
-      //println(time_sum)
-      val t0 = System.nanoTime()
-      ECLAT(P, min_support, F)
-      val t1 = System.nanoTime()
-      time_sum += (t1 - t0)
-      writer.write((t1 - t0).toString + ", ")
+    // Loop n times and print execution time to file
+    if(run_eclat) {
+      for (i <- 1 to max_loop) {
+        //println(time_sum)
+        val t0 = System.nanoTime()
+        ECLAT(P, min_support, F)
+        val t1 = System.nanoTime()
+        time_sum += (t1 - t0)
+        writer.write((t1 - t0).toString + ", ")
+      }
+      writer.write("\n")
+      //println(output_eclat)
+      println("Time required for ECLAT : " + time_sum.toDouble / (max_loop * 1000).toDouble + " ms")
     }
-    writer.write("\n")
-    //println(output_eclat)
-    writer.close()
-    println("Time required for eclat : " + time_sum.toDouble / (max_loop * 1000).toDouble + " ms")
+
 
     // dECLAT
     var DP:Set[d_itemSet] = Set()
@@ -48,16 +57,79 @@ object eclat {
     }
     P.foreach{ item =>
       val t:d_itemSet = new d_itemSet(item.i, T -- item.t_i, item.t_i.size)
-      DP += t
+      if(t.sup_i >= min_support) {
+        DP += t
+      }
     }
-    //println(DP)
-    println(dECLAT(DP, min_support, DF))
+
+    if(!run_eclat) {
+      time_sum = 0 // initialization : in nano seconds
+      // Loop n times and print execution time to file
+      for (i <- 1 to max_loop) {
+        //println(time_sum)
+        val t0 = System.nanoTime()
+        dECLAT(DP, min_support, DF)
+        val t1 = System.nanoTime()
+        time_sum += (t1 - t0)
+        writer.write((t1 - t0).toString + ", ")
+      }
+      writer.write("\n")
+      println("Time required for dECLAT : " + time_sum.toDouble / (max_loop * 1000).toDouble + " ms")
+    }
+
+    writer.close()
+
+    // Check if output of ECLAT & dECLAT output is same
+    /*
+    val out_eclat:Set[itemSet] = ECLAT(P, min_support, F)
+    val out_declat:Set[d_itemSet] = dECLAT(DP, min_support, DF)
+    var out_eclat_refined:Set[Set[Char]] = Set()
+    var out_declat_refined:Set[Set[Char]] = Set()
+    out_eclat.foreach{ item =>
+      out_eclat_refined += item.i
+    }
+    out_declat.foreach{ item =>
+      out_declat_refined += item.i
+    }
+    val union_of_eclat_declat:Set[Set[Char]] = out_eclat_refined | out_declat_refined
+    if(union_of_eclat_declat.size == out_eclat_refined.size & union_of_eclat_declat.size == out_declat_refined.size){
+      println("\nEclat and dEclat output matches.")
+    }
+    */
 
   }
 
-  def dECLAT(DP:Set[d_itemSet], min_sup:Int, F:Set[d_itemSet]) : Set[d_itemSet] = {
-    var F_curr:Set[d_itemSet] = F  //initialize F_curr as null set
-    
+  def dECLAT(DP:Set[d_itemSet], min_sup:Int, DF:Set[d_itemSet]) : Set[d_itemSet] = {
+    var F_curr:Set[d_itemSet] = DF  //initialize F_curr as null set
+    // for each item in P check possible frequent next level items
+    DP.foreach { item1 =>
+      F_curr = F_curr + item1
+      var P1:Set[d_itemSet] = Set()
+      //
+      DP.foreach { item2 =>
+        if(isValid(item1.i, item2.i)){
+          var commonChar:Set[Char] = Set()
+          commonChar = item1.i | item2.i        //union of item1 and item2
+          var commonSet:Set[Int] = Set()
+          commonSet = item2.d_i -- item1.d_i     //intersection of tid of item1 and item2
+          val support_12 = item1.sup_i - commonSet.size
+          //println(commonChar)
+          //println(item1 + "\t" + item2 + "\t" + commonChar + "\t" + commonSet + "\t" + support_12 + "\n")
+          if(support_12 >= min_sup){        //support of commonSet greater than minsup
+          val tempItem:d_itemSet = d_itemSet(commonChar, commonSet, support_12)
+            P1 = P1 + tempItem                  //add current item to P1
+          }
+        }
+      }
+      //repeat above for next level items
+      if(P1.nonEmpty){
+        val F_next:Set[d_itemSet] = dECLAT(P1,min_sup,F_curr)
+        //add next level frequent items to current level frequent items
+        F_curr = F_curr | F_next
+      }
+    }
+    //println(F_curr)
+    //return all frequent items
     return F_curr
   }
 
