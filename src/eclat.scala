@@ -3,7 +3,6 @@
   */
 import java.io._
 import scala.io.Source
-import java.util.concurrent
 
 //objects are an anonymous (inaccessible) class and creates a single instance of this class 
 object eclat {
@@ -30,7 +29,7 @@ object eclat {
           curr_trans += string.toInt
         }
         //println(curr_trans)
-        P += new itemSet(curr_char, curr_trans)
+        P += itemSet(curr_char, curr_trans)
         transactions = 0
       }
     }
@@ -48,7 +47,7 @@ object eclat {
     // ECLAT initialization
     val F:Set[itemSet] = Set()
     val min_support = 3
-    val run_eclat:Boolean = true
+    val run_eclat:Boolean = false
     val run_both_prog_and_compare = true
 
     // Start FileWriter to append/plot data in csv format
@@ -73,7 +72,7 @@ object eclat {
         writer.write((t1 - t0).toString + ", ")
       }
       writer.write("\n")
-      println("Time required for ECLAT : " + time_sum.toDouble / (max_loop * 1000).toDouble + " ms")
+      println("Time required for ECLAT : " + time_sum.toDouble / (max_loop * 1000).toDouble + " micro sec")
     }
 
 
@@ -85,7 +84,7 @@ object eclat {
       T = T | item.t_i
     }
     P.foreach{ item =>
-      val t:d_itemSet = new d_itemSet(item.i, T -- item.t_i, item.t_i.size)
+      val t:d_itemSet = d_itemSet(item.i, T -- item.t_i, item.t_i.size)
       if(t.sup_i >= min_support) {
         DP += t
       }
@@ -103,7 +102,7 @@ object eclat {
         writer.write((t1 - t0).toString + ", ")
       }
       writer.write("\n")
-      println("Time required for dECLAT : " + time_sum.toDouble / (max_loop * 1000).toDouble + " ms")
+      println("Time required for dECLAT : " + time_sum.toDouble / (max_loop * 1000).toDouble + " micro sec")
     }
 
     writer.close()
@@ -122,8 +121,38 @@ object eclat {
       }
       val union_of_eclat_declat: Set[Set[Char]] = out_eclat_refined | out_declat_refined
       if (union_of_eclat_declat.size == out_eclat_refined.size & union_of_eclat_declat.size == out_declat_refined.size) {
-        println("\nEclat and dEclat output matches.")
+        println("\nEclat and dEclat output matches.\n")
       }
+
+      writer = new FileWriter(new File("comparison_graph.csv"))
+      var eclat_avg_array = Array.fill[Int](50)(0)
+      var declat_avg_array = Array.fill[Int](50)(0)
+      var split_line:Array[String] = Array()
+      for(i <- 1 to 50){
+        for(line <- Source.fromFile("eclat_plotter.csv").getLines()) {
+          split_line = line.split(", ")
+          eclat_avg_array(i-1) += split_line(i-1).toInt
+          //println(split_line(i-1).toInt)
+        }
+        for(line <- Source.fromFile("declat_plotter.csv").getLines()) {
+          split_line = line.split(", ")
+          declat_avg_array(i-1) += split_line(i-1).toInt
+        }
+      }
+
+      val count1 = Source.fromFile("eclat_plotter.csv").getLines().size
+      val count2 = Source.fromFile("declat_plotter.csv").getLines().size
+      for(i <- 0 to 49){
+        writer.write(eclat_avg_array(i)/count1 + ", ")
+      }
+      writer.write("\n")
+      for(i <- 0 to 49){
+        writer.write(declat_avg_array(i)/count2 + ", ")
+      }
+      writer.write("\n")
+
+      writer.close()
+      println("Generated comparison graph.\n")
     }
 
   }

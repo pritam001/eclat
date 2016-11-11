@@ -6,6 +6,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/declat_plotter.csv" afterPath="$PROJECT_DIR$/declat_plotter.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclat_plotter.csv" afterPath="$PROJECT_DIR$/eclat_plotter.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eclat.scala" afterPath="$PROJECT_DIR$/src/eclat.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/time_plotter.csv" afterPath="$PROJECT_DIR$/time_plotter.csv" />
     </list>
     <ignored path="eclat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,8 +31,8 @@
       <file leaf-file-name="eclat.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/eclat.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            <state relative-caret-position="148">
+              <caret line="190" column="11" selection-start-line="190" selection-start-column="11" selection-end-line="190" selection-end-column="11" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#45#61#0" expanded="true" />
@@ -631,7 +632,7 @@
       <workItem from="1476637856688" duration="16957000" />
       <workItem from="1478283052150" duration="2113000" />
       <workItem from="1478421336042" duration="1397000" />
-      <workItem from="1478828474579" duration="13774000" />
+      <workItem from="1478828474579" duration="17780000" />
     </task>
     <task id="LOCAL-00001" summary="Level 1 check for frequent itemsets">
       <created>1476688347893</created>
@@ -668,11 +669,18 @@
       <option name="project" value="LOCAL" />
       <updated>1478897098419</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Read from large data file">
+      <created>1478898496969</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1478898496969</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34370000" />
+    <option name="totallyTimeSpent" value="38376000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -740,7 +748,8 @@
     <MESSAGE value="Multi-loop eclat with average execution time output" />
     <MESSAGE value="Multi-loop dECLAT with average execution time output" />
     <MESSAGE value="ECLAT and dECLAT graph plotter" />
-    <option name="LAST_COMMIT_MESSAGE" value="ECLAT and dECLAT graph plotter" />
+    <MESSAGE value="Read from large data file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Read from large data file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -789,8 +798,8 @@
     <entry file="file://$PROJECT_DIR$/src/eclat_algo.scala" />
     <entry file="file://$PROJECT_DIR$/src/eclat.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="148">
+          <caret line="190" column="11" selection-start-line="190" selection-start-column="11" selection-end-line="190" selection-end-column="11" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#45#61#0" expanded="true" />
