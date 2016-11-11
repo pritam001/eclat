@@ -11,18 +11,45 @@ object eclat {
   case class d_itemSet(i: Set[Char], d_i: Set[Int], sup_i : Int)
 
   def main(args: Array[String]) {
+    // Read data from .dat file
+    var P:Set[itemSet] = Set()
+    var transactions:Int = 0
+    var curr_char:Set[Char] = Set()
+    var split_string:Array[String] = Array()
+    var curr_trans:Set[Int] = Set()
+    for(line <- Source.fromFile("large.dat").getLines()) {
+      if(transactions == 0){
+        curr_char = Set()
+        curr_char += line.charAt(0)
+        //println(curr_char)
+        transactions = 1
+      } else {
+        curr_trans = Set()
+        split_string = line.split(" ")
+        split_string.foreach{ string =>
+          curr_trans += string.toInt
+        }
+        //println(curr_trans)
+        P += new itemSet(curr_char, curr_trans)
+        transactions = 0
+      }
+    }
+
+    //println(P)
+    /*
     val x1:itemSet = itemSet(Set('A'), Set(1,3,4,5))
     val x2:itemSet = itemSet(Set('B'), Set(1,2,3,4,5,6))
     val x3:itemSet = itemSet(Set('C'), Set(2,4,5,6))
     val x4:itemSet = itemSet(Set('D'), Set(1,3,5,6))
     val x5:itemSet = itemSet(Set('E'), Set(1,2,3,4,5))
     val P:Set[itemSet] = Set(x1,x2,x3,x4,x5)
+    */
 
     // ECLAT initialization
     val F:Set[itemSet] = Set()
     val min_support = 3
-    val run_eclat:Boolean = false
-    val run_both_prog_and_compare = false
+    val run_eclat:Boolean = true
+    val run_both_prog_and_compare = true
 
     // Start FileWriter to append/plot data in csv format
     var writer:FileWriter = new FileWriter(new File("empty.csv"), true)
