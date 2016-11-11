@@ -18,11 +18,13 @@ object eclat {
     val x5:itemSet = itemSet(Set('E'), Set(1,2,3,4,5))
     val P:Set[itemSet] = Set(x1,x2,x3,x4,x5)
 
+    // ECLAT initialization
     val F:Set[itemSet] = Set()
     val min_support = 3
-    val run_eclat:Boolean = true
+    val run_eclat:Boolean = false
+    val run_both_prog_and_compare = false
 
-    // ECLAT
+    // Start FileWriter to append/plot data in csv format
     var writer:FileWriter = new FileWriter(new File("empty.csv"), true)
     if(run_eclat) {
       writer = new FileWriter(new File("eclat_plotter.csv"), true)
@@ -32,6 +34,7 @@ object eclat {
     val max_loop:Int = 50 // number of times the code will run
 
     var time_sum:Long = 0 // in nano seconds
+
     // Loop n times and print execution time to file
     if(run_eclat) {
       for (i <- 1 to max_loop) {
@@ -43,12 +46,11 @@ object eclat {
         writer.write((t1 - t0).toString + ", ")
       }
       writer.write("\n")
-      //println(output_eclat)
       println("Time required for ECLAT : " + time_sum.toDouble / (max_loop * 1000).toDouble + " ms")
     }
 
 
-    // dECLAT
+    // dECLAT initialization
     var DP:Set[d_itemSet] = Set()
     var T:Set[Int] = Set()
     val DF:Set[d_itemSet] = Set()
@@ -80,22 +82,22 @@ object eclat {
     writer.close()
 
     // Check if output of ECLAT & dECLAT output is same
-    /*
-    val out_eclat:Set[itemSet] = ECLAT(P, min_support, F)
-    val out_declat:Set[d_itemSet] = dECLAT(DP, min_support, DF)
-    var out_eclat_refined:Set[Set[Char]] = Set()
-    var out_declat_refined:Set[Set[Char]] = Set()
-    out_eclat.foreach{ item =>
-      out_eclat_refined += item.i
+    if(run_both_prog_and_compare) {
+      val out_eclat: Set[itemSet] = ECLAT(P, min_support, F)
+      val out_declat: Set[d_itemSet] = dECLAT(DP, min_support, DF)
+      var out_eclat_refined: Set[Set[Char]] = Set()
+      var out_declat_refined: Set[Set[Char]] = Set()
+      out_eclat.foreach { item =>
+        out_eclat_refined += item.i
+      }
+      out_declat.foreach { item =>
+        out_declat_refined += item.i
+      }
+      val union_of_eclat_declat: Set[Set[Char]] = out_eclat_refined | out_declat_refined
+      if (union_of_eclat_declat.size == out_eclat_refined.size & union_of_eclat_declat.size == out_declat_refined.size) {
+        println("\nEclat and dEclat output matches.")
+      }
     }
-    out_declat.foreach{ item =>
-      out_declat_refined += item.i
-    }
-    val union_of_eclat_declat:Set[Set[Char]] = out_eclat_refined | out_declat_refined
-    if(union_of_eclat_declat.size == out_eclat_refined.size & union_of_eclat_declat.size == out_declat_refined.size){
-      println("\nEclat and dEclat output matches.")
-    }
-    */
 
   }
 
