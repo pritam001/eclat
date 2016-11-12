@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1861ea0-4f00-4700-a10d-1824bd5c36e2" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/comparison_graph1.xlsx" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/large.dat" afterPath="$PROJECT_DIR$/large.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/eclat_large.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/comparison_graph2.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/declat_plotter2.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/comparison_graph.csv" afterPath="$PROJECT_DIR$/comparison_graph.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/declat_plotter.csv" afterPath="$PROJECT_DIR$/declat_plotter.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eclat.scala" afterPath="$PROJECT_DIR$/src/eclat.scala" />
     </list>
     <ignored path="eclat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,8 +30,8 @@
       <file leaf-file-name="eclat.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/eclat.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="125" column="33" selection-start-line="125" selection-start-column="33" selection-end-line="125" selection-end-column="33" />
+            <state relative-caret-position="374">
+              <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#45#61#0" expanded="true" />
@@ -113,6 +111,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="eclat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eclat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eclat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -635,7 +647,7 @@
       <workItem from="1478283052150" duration="2113000" />
       <workItem from="1478421336042" duration="1397000" />
       <workItem from="1478828474579" duration="18928000" />
-      <workItem from="1478952621717" duration="1998000" />
+      <workItem from="1478952621717" duration="2291000" />
     </task>
     <task id="LOCAL-00001" summary="Level 1 check for frequent itemsets">
       <created>1476688347893</created>
@@ -693,11 +705,18 @@
       <option name="project" value="LOCAL" />
       <updated>1478903580696</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Large data comparison">
+      <created>1478954654219</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1478954654219</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41522000" />
+    <option name="totallyTimeSpent" value="41815000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -711,7 +730,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21135646" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21135646" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -768,7 +787,8 @@
     <MESSAGE value="Read from large data file" />
     <MESSAGE value="Auto generated graph" />
     <MESSAGE value="Demo comparison" />
-    <option name="LAST_COMMIT_MESSAGE" value="Demo comparison" />
+    <MESSAGE value="Large data comparison" />
+    <option name="LAST_COMMIT_MESSAGE" value="Large data comparison" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -832,8 +852,8 @@
     <entry file="file://$PROJECT_DIR$/src/eclat_algo.scala" />
     <entry file="file://$PROJECT_DIR$/src/eclat.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="125" column="33" selection-start-line="125" selection-start-column="33" selection-end-line="125" selection-end-column="33" />
+        <state relative-caret-position="374">
+          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#45#61#0" expanded="true" />
