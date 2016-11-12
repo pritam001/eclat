@@ -16,6 +16,11 @@ object eclat {
     var curr_char:Set[Char] = Set()
     var split_string:Array[String] = Array()
     var curr_trans:Set[Int] = Set()
+
+    val min_support = 100
+    val run_eclat:Boolean = true
+    val run_both_prog_and_compare = true
+
     for(line <- Source.fromFile("large.dat").getLines()) {
       if(transactions == 0){
         curr_char = Set()
@@ -29,7 +34,9 @@ object eclat {
           curr_trans += string.toInt
         }
         //println(curr_trans)
-        P += itemSet(curr_char, curr_trans)
+        if(curr_trans.size > min_support) {
+          P += itemSet(curr_char, curr_trans)
+        }
         transactions = 0
       }
     }
@@ -46,18 +53,15 @@ object eclat {
 
     // ECLAT initialization
     val F:Set[itemSet] = Set()
-    val min_support = 3
-    val run_eclat:Boolean = false
-    val run_both_prog_and_compare = true
 
     // Start FileWriter to append/plot data in csv format
     var writer:FileWriter = new FileWriter(new File("empty.csv"), true)
     if(run_eclat) {
-      writer = new FileWriter(new File("eclat_plotter.csv"), true)
+      writer = new FileWriter(new File("eclat_plotter2.csv"), true)
     } else {
-      writer = new FileWriter(new File("declat_plotter.csv"), true)
+      writer = new FileWriter(new File("declat_plotter2.csv"), true)
     }
-    val max_loop:Int = 50 // number of times the code will run
+    val max_loop:Int = 10 // number of times the code will run
 
     var time_sum:Long = 0 // in nano seconds
 
@@ -124,29 +128,29 @@ object eclat {
         println("\nEclat and dEclat output matches.\n")
       }
 
-      writer = new FileWriter(new File("comparison_graph.csv"))
-      var eclat_avg_array = Array.fill[Int](50)(0)
-      var declat_avg_array = Array.fill[Int](50)(0)
+      writer = new FileWriter(new File("comparison_graph2.csv"))
+      var eclat_avg_array = Array.fill[Long](max_loop)(0)
+      var declat_avg_array = Array.fill[Long](max_loop)(0)
       var split_line:Array[String] = Array()
-      for(i <- 1 to 50){
-        for(line <- Source.fromFile("eclat_plotter.csv").getLines()) {
+      for(i <- 1 to max_loop){
+        for(line <- Source.fromFile("eclat_plotter2.csv").getLines()) {
           split_line = line.split(", ")
           eclat_avg_array(i-1) += split_line(i-1).toInt
           //println(split_line(i-1).toInt)
         }
-        for(line <- Source.fromFile("declat_plotter.csv").getLines()) {
+        for(line <- Source.fromFile("declat_plotter2.csv").getLines()) {
           split_line = line.split(", ")
           declat_avg_array(i-1) += split_line(i-1).toInt
         }
       }
 
-      val count1 = Source.fromFile("eclat_plotter.csv").getLines().size
-      val count2 = Source.fromFile("declat_plotter.csv").getLines().size
-      for(i <- 0 to 49){
+      val count1 = Source.fromFile("eclat_plotter2.csv").getLines().size
+      val count2 = Source.fromFile("declat_plotter2.csv").getLines().size
+      for(i <- 0 to max_loop - 1){
         writer.write(eclat_avg_array(i)/count1 + ", ")
       }
       writer.write("\n")
-      for(i <- 0 to 49){
+      for(i <- 0 to max_loop - 1){
         writer.write(declat_avg_array(i)/count2 + ", ")
       }
       writer.write("\n")
