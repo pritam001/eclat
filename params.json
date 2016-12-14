@@ -1,0 +1,6 @@
+{
+  "name": "Frequent Itemset Generation Algorithms",
+  "tagline": "Eclat vs dEclat algorithm comparison for mining frequent itemsets running on scala environment",
+  "body": "# eclat\r\n***Eclat vs dEclat algorithm for mining frequent itemsets running on scala environment***\r\n\r\n###Comparison between these algorithms for a small dataset :\r\n\r\n![Demo comparison](https://github.com/pritam001/eclat/blob/master/images/eclatVsdeclat.png \"Comparison for small dataset\")\r\n\r\n\r\n\r\n###Comparison between these algorithms for a large dataset :\r\n\r\n![Large comparison](https://github.com/pritam001/eclat/blob/master/images/eclat_large.png \"Comparison for large dataset\")\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
